@@ -1,0 +1,15 @@
+{
+  "name": "mini-campaign-manager",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev:api": "yarn workspace @campaign/api dev",
+    "dev:web": "yarn workspace @campaign/web dev",
+    "dev": "concurrently \"yarn dev:api\" \"yarn dev:web\"",
+    "test": "yarn workspace @campaign/api test",
+    "seed": "yarn workspace @campaign/api seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
