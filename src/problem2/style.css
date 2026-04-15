@@ -1,8 +1,518 @@
+/* ── Reset & Base ─────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0b1120;
+  --surface: #131a2a;
+  --surface-light: #1b2338;
+  --surface-lighter: #243056;
+  --border: #2d3a54;
+  --text: #e1e7ef;
+  --text-sec: #8b95a8;
+  --text-dim: #5a6478;
+  --accent: #6c5ce7;
+  --accent-hover: #7c6ef7;
+  --red: #ff6b6b;
+  --red-bg: rgba(255, 107, 107, 0.1);
+  --red-border: rgba(255, 107, 107, 0.2);
+  --green: #51cf66;
+  --green-bg: rgba(81, 207, 102, 0.1);
+  --green-border: rgba(81, 207, 102, 0.2);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
 body {
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at top, #1a1f3d 0%, transparent 50%);
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--text);
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  min-width: 360px;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Form Layout ─────────────────────────────────── */
+#swap-form {
+  width: 100%;
+  max-width: 460px;
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* ── Panel ────────────────────────────────────────── */
+.panel {
+  background: var(--surface-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 4px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-sec);
+}
+
+.balance-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.balance {
+  font-size: 12px;
+  color: var(--text-sec);
+}
+
+.max-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s;
+}
+
+.max-btn:hover {
+  background: var(--accent-hover);
+}
+
+.panel-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-footer {
+  margin-top: 6px;
+  min-height: 18px;
+}
+
+.usd {
+  font-size: 12px;
+  color: var(--text-sec);
+}
+
+/* ── Amount Input ─────────────────────────────────── */
+#from-amount {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text);
+  font-family: var(--font);
+  min-width: 0;
+}
+
+#from-amount::placeholder {
+  color: var(--text-dim);
+}
+
+/* ── Receive Display ──────────────────────────────── */
+.receive-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.receive-value {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Token Button ─────────────────────────────────── */
+.token-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--surface-lighter);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.token-btn:hover {
+  background: #2d3d66;
+}
+
+.token-placeholder {
+  color: var(--text-sec);
+}
+
+.token-btn .icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.token-btn .icon-fallback {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-sec);
+  flex-shrink: 0;
+}
+
+.chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--text-sec);
+  flex-shrink: 0;
+}
+
+/* ── Swap Direction ───────────────────────────────── */
+.swap-row {
+  display: flex;
+  justify-content: center;
+  margin: -8px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.swap-dir-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-light);
+  border: 4px solid var(--bg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.swap-dir-btn svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-sec);
+  transition: color 0.15s;
+}
+
+.swap-dir-btn:hover {
+  background: var(--surface-lighter);
+}
+
+.swap-dir-btn:hover svg {
+  color: var(--text);
+}
+
+/* ── Rate ─────────────────────────────────────────── */
+.rate {
+  font-size: 12px;
+  color: var(--text-sec);
+  padding: 8px 4px 0;
+  min-height: 24px;
+}
+
+/* ── Message ──────────────────────────────────────── */
+.msg {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.msg-error {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  color: var(--red);
+}
+
+.msg-success {
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  color: var(--green);
+}
+
+/* ── Submit Button ────────────────────────────────── */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Spinners ─────────────────────────────────────── */
+.spinner-sm {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Skeleton ─────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-lighter) 25%,
+    var(--border) 50%,
+    var(--surface-lighter) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  color: transparent !important;
+  display: inline-block;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Modal ────────────────────────────────────────── */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 420px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+
+.modal-head h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.modal-x {
+  background: none;
+  border: none;
+  color: var(--text-sec);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.modal-x:hover {
+  color: var(--text);
+}
+
+.modal-search {
+  padding: 0 16px 12px;
+}
+
+.modal-search input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.modal-search input::placeholder {
+  color: var(--text-dim);
+}
+
+.modal-search input:focus {
+  border-color: var(--accent);
+}
+
+.modal-list {
+  overflow-y: auto;
+  flex: 1;
+  padding-bottom: 8px;
+}
+
+.modal-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  color: var(--text);
+  transition: background 0.1s;
+}
+
+.modal-item:hover {
+  background: var(--surface-light);
+}
+
+.modal-item .icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.modal-item .icon-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-lighter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-sec);
+  flex-shrink: 0;
+}
+
+.modal-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.modal-item-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.modal-item-price {
+  font-size: 12px;
+  color: var(--text-sec);
+}
+
+.modal-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-sec);
+  font-size: 14px;
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 480px) {
+  #from-amount,
+  .receive-value {
+    font-size: 22px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
 }

@@ -1,27 +1,89 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
-  <link href="style.css" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fancy Form - Currency Swap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <form id="swap-form">
+    <h1 class="form-title">Swap</h1>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+    <!-- From Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="label">You pay</span>
+        <div class="balance-row">
+          <span id="from-balance" class="balance"></span>
+          <button type="button" id="from-max" class="max-btn" hidden>MAX</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <input type="text" id="from-amount" inputmode="decimal" placeholder="0" autocomplete="off" spellcheck="false" />
+        <button type="button" id="from-token-btn" class="token-btn">
+          <span class="token-placeholder">Select token</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="panel-footer"><span id="from-usd" class="usd"></span></div>
+    </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+    <!-- Swap Direction -->
+    <div class="swap-row">
+      <button type="button" id="swap-dir" class="swap-dir-btn" aria-label="Swap direction">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+        </svg>
+      </button>
+    </div>
 
-    <button>CONFIRM SWAP</button>
+    <!-- To Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="label">You receive</span>
+        <span id="to-balance" class="balance"></span>
+      </div>
+      <div class="panel-body">
+        <div class="receive-area">
+          <span id="to-amount" class="receive-value">0</span>
+          <span id="quote-spinner" class="spinner-sm" hidden></span>
+        </div>
+        <button type="button" id="to-token-btn" class="token-btn">
+          <span class="token-placeholder">Select token</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="panel-footer"><span id="to-usd" class="usd"></span></div>
+    </div>
+
+    <!-- Rate & Slippage -->
+    <div id="rate" class="rate"></div>
+
+    <!-- Message -->
+    <div id="msg" class="msg" hidden></div>
+
+    <!-- Submit -->
+    <button type="submit" id="submit" class="submit-btn" disabled>Select tokens</button>
   </form>
+
+  <!-- Token Selection Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>Select a token</h2>
+        <button type="button" id="modal-close" class="modal-x" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-search">
+        <input type="text" id="modal-input" placeholder="Search by name..." autocomplete="off" spellcheck="false" />
+      </div>
+      <div id="modal-list" class="modal-list"></div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,50 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # The site is mostly static files. Only problem2 needs to be
+      # copied as-is (vanilla HTML/CSS/JS, no build step).
+      # We assemble the final site in _site/.
+      - name: Build site
+        run: |
+          mkdir -p _site/src/problem2
+
+          # Landing page
+          cp index.html _site/
+
+          # Problem 2: vanilla HTML — just copy
+          cp src/problem2/index.html src/problem2/style.css src/problem2/script.js _site/src/problem2/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

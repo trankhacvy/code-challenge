@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>99Tech Code Challenge</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b1120;
+      --surface: #151d30;
+      --border: #2a3450;
+      --text: #e1e7ef;
+      --text-sec: #8b95a8;
+      --accent: #6c5ce7;
+      --accent-hover: #7c6ef7;
+      --font: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { width: 100%; max-width: 640px; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: var(--text-sec); font-size: 15px; margin-bottom: 32px; }
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .card:hover { border-color: var(--accent); background: #1a2440; }
+    .card-left { display: flex; flex-direction: column; gap: 4px; }
+    .card-title { font-size: 15px; font-weight: 600; }
+    .card-desc { font-size: 13px; color: var(--text-sec); }
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .badge-js { background: rgba(247,223,30,0.15); color: #f7df1e; }
+    .badge-ts { background: rgba(49,120,198,0.15); color: #3178c6; }
+    .badge-html { background: rgba(108,92,231,0.15); color: #a89af7; }
+    .badge-md { background: rgba(81,207,102,0.15); color: #51cf66; }
+    .badge-api { background: rgba(255,107,107,0.15); color: #ff8a8a; }
+    .arrow { color: var(--text-sec); font-size: 18px; margin-left: 12px; }
+    .footer { margin-top: 32px; text-align: center; font-size: 12px; color: var(--text-sec); }
+    .footer a { color: var(--accent); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <h1>99Tech Code Challenge</h1>
+    <p class="subtitle">Solutions by Khac Vy</p>
+
+    <a class="card" href="https://github.com/trankhacvy/code-challenge/blob/main/src/problem1/index.js">
+      <div class="card-left">
+        <span class="card-title">Problem 1 — Three Ways to Sum to N</span>
+        <span class="card-desc">Gauss formula, iterative loop, recursion</span>
+      </div>
+      <span class="badge badge-js">JS</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <a class="card" href="./src/problem2/">
+      <div class="card-left">
+        <span class="card-title">Problem 2 — Fancy Form</span>
+        <span class="card-desc">Currency swap form with live quotes, vanilla JS</span>
+      </div>
+      <span class="badge badge-html">Live Demo</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <a class="card" href="https://github.com/trankhacvy/code-challenge/blob/main/src/problem3/index.tsx">
+      <div class="card-left">
+        <span class="card-title">Problem 3 — Messy React</span>
+        <span class="card-desc">16 issues identified + refactored version</span>
+      </div>
+      <span class="badge badge-ts">TSX</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <a class="card" href="https://github.com/trankhacvy/code-challenge/blob/main/src/problem4/index.ts">
+      <div class="card-left">
+        <span class="card-title">Problem 4 — Three Ways to Sum to N (TS)</span>
+        <span class="card-desc">Same three approaches, TypeScript version</span>
+      </div>
+      <span class="badge badge-ts">TS</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <a class="card" href="https://github.com/trankhacvy/code-challenge/blob/main/src/problem5/README.md">
+      <div class="card-left">
+        <span class="card-title">Problem 5 — A Crude Server</span>
+        <span class="card-desc">Express + TypeScript + SQLite REST API</span>
+      </div>
+      <span class="badge badge-api">API</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <a class="card" href="https://github.com/trankhacvy/code-challenge/blob/main/src/problem6/README.md">
+      <div class="card-left">
+        <span class="card-title">Problem 6 — Architecture</span>
+        <span class="card-desc">Live scoreboard module specification</span>
+      </div>
+      <span class="badge badge-md">Spec</span>
+      <span class="arrow">&#8250;</span>
+    </a>
+
+    <div class="footer">
+      <a href="https://github.com/trankhacvy/code-challenge">View on GitHub</a>
+    </div>
+  </div>
+</body>
+</html>
